@@ -14,7 +14,187 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      attendance: {
+        Row: {
+          created_at: string
+          daily_earning: number
+          date: string
+          id: string
+          overtime_amount: number
+          overtime_hours: number
+          status: string
+          user_id: string
+          worker_id: string
+        }
+        Insert: {
+          created_at?: string
+          daily_earning?: number
+          date: string
+          id?: string
+          overtime_amount?: number
+          overtime_hours?: number
+          status?: string
+          user_id: string
+          worker_id: string
+        }
+        Update: {
+          created_at?: string
+          daily_earning?: number
+          date?: string
+          id?: string
+          overtime_amount?: number
+          overtime_hours?: number
+          status?: string
+          user_id?: string
+          worker_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "attendance_worker_id_fkey"
+            columns: ["worker_id"]
+            isOneToOne: false
+            referencedRelation: "workers"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      businesses: {
+        Row: {
+          business_name: string
+          contractor_name: string | null
+          created_at: string
+          id: string
+          language: string
+          phone: string | null
+          user_id: string
+        }
+        Insert: {
+          business_name: string
+          contractor_name?: string | null
+          created_at?: string
+          id?: string
+          language?: string
+          phone?: string | null
+          user_id: string
+        }
+        Update: {
+          business_name?: string
+          contractor_name?: string | null
+          created_at?: string
+          id?: string
+          language?: string
+          phone?: string | null
+          user_id?: string
+        }
+        Relationships: []
+      }
+      payments: {
+        Row: {
+          amount: number
+          created_at: string
+          date: string
+          id: string
+          notes: string | null
+          payment_method: string
+          payment_type: string
+          user_id: string
+          worker_id: string
+        }
+        Insert: {
+          amount: number
+          created_at?: string
+          date?: string
+          id?: string
+          notes?: string | null
+          payment_method?: string
+          payment_type?: string
+          user_id: string
+          worker_id: string
+        }
+        Update: {
+          amount?: number
+          created_at?: string
+          date?: string
+          id?: string
+          notes?: string | null
+          payment_method?: string
+          payment_type?: string
+          user_id?: string
+          worker_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "payments_worker_id_fkey"
+            columns: ["worker_id"]
+            isOneToOne: false
+            referencedRelation: "workers"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      profiles: {
+        Row: {
+          created_at: string
+          email: string | null
+          id: string
+          name: string | null
+          phone: string | null
+        }
+        Insert: {
+          created_at?: string
+          email?: string | null
+          id: string
+          name?: string | null
+          phone?: string | null
+        }
+        Update: {
+          created_at?: string
+          email?: string | null
+          id?: string
+          name?: string | null
+          phone?: string | null
+        }
+        Relationships: []
+      }
+      workers: {
+        Row: {
+          created_at: string
+          daily_wage: number
+          id: string
+          joining_date: string
+          name: string
+          overtime_rate: number
+          phone: string | null
+          status: string
+          user_id: string
+          work_type: string
+        }
+        Insert: {
+          created_at?: string
+          daily_wage?: number
+          id?: string
+          joining_date?: string
+          name: string
+          overtime_rate?: number
+          phone?: string | null
+          status?: string
+          user_id: string
+          work_type?: string
+        }
+        Update: {
+          created_at?: string
+          daily_wage?: number
+          id?: string
+          joining_date?: string
+          name?: string
+          overtime_rate?: number
+          phone?: string | null
+          status?: string
+          user_id?: string
+          work_type?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
