@@ -1,24 +1,79 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
+import { useEffect } from "react";
+import { ClipboardCheck, HardHat, Wallet } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { supabase } from "@/integrations/supabase/client";
+import { useI18n } from "@/lib/i18n";
 
-// No head() here: the home route inherits title/description/og/twitter from
-// __root.tsx, and ships no og:image so serve-time hosting can inject the
-// project's social preview (explicit og:image or latest screenshot).
 export const Route = createFileRoute("/")({
-  component: Index,
+  head: () => ({
+    meta: [
+      { title: "Kaam Saathi — Contractor Attendance & Payment Manager" },
+      {
+        name: "description",
+        content:
+          "Mark attendance, auto-calculate wages, overtime and advances, and settle worker payments in seconds.",
+      },
+      { property: "og:title", content: "Kaam Saathi — Contractor Attendance & Payment Manager" },
+      {
+        property: "og:description",
+        content: "Worker ki attendance se lekar payment tak — sab automatic.",
+      },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
+    ],
+  }),
+  component: Landing,
 });
 
-// IMPORTANT: Replace this placeholder. See ./README.md for routing conventions.
-function Index() {
+function Landing() {
+  const { t } = useI18n();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    void supabase.auth.getSession().then(({ data }) => {
+      if (data.session) void navigate({ to: "/home", replace: true });
+    });
+  }, [navigate]);
+
   return (
-    <div
-      className="flex min-h-screen items-center justify-center"
-      style={{ backgroundColor: "#fcfbf8" }}
-    >
-      <img
-        data-lovable-blank-page-placeholder="REMOVE_THIS"
-        src="https://cdn.gpteng.co/blank-app-v1.svg"
-        alt="Your app will live here!"
-      />
-    </div>
+    <main className="flex min-h-screen flex-col justify-center bg-background px-5 py-12">
+      <div className="mx-auto w-full max-w-md">
+        <span className="inline-flex items-center rounded-full bg-success-soft px-3 py-1 text-xs font-semibold text-success">
+          {t("subtitle")}
+        </span>
+        <h1 className="mt-5 font-display text-4xl leading-tight font-bold tracking-tight text-foreground">
+          {t("app_name")}
+        </h1>
+        <p className="mt-3 text-base text-muted-foreground">{t("tagline")}</p>
+
+        <div className="mt-8 space-y-3">
+          {[
+            { icon: ClipboardCheck, text: t("mark_attendance") },
+            { icon: Wallet, text: t("pay_worker") },
+            { icon: HardHat, text: t("add_worker") },
+          ].map(({ icon: Icon, text }) => (
+            <div
+              key={text}
+              className="flex items-center gap-3 rounded-2xl border border-border bg-card p-4 shadow-card"
+            >
+              <span className="flex size-10 items-center justify-center rounded-xl bg-secondary">
+                <Icon className="size-5 text-primary" />
+              </span>
+              <span className="font-medium">{text}</span>
+            </div>
+          ))}
+        </div>
+
+        <div className="mt-8 space-y-3">
+          <Button asChild className="h-14 w-full text-base">
+            <Link to="/auth">{t("get_started")}</Link>
+          </Button>
+          <Button asChild variant="ghost" className="h-12 w-full">
+            <Link to="/auth">{t("sign_in")}</Link>
+          </Button>
+        </div>
+      </div>
+    </main>
   );
 }
