@@ -10,33 +10,131 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/route'
+import { Route as AuthRouteImport } from './routes/auth'
+import { Route as AuthenticatedAttendanceRouteImport } from './routes/_authenticated/attendance'
+import { Route as AuthenticatedHomeRouteImport } from './routes/_authenticated/home'
+import { Route as AuthenticatedMoreRouteImport } from './routes/_authenticated/more'
+import { Route as AuthenticatedPaymentsRouteImport } from './routes/_authenticated/payments'
+import { Route as AuthenticatedWorkersIndexRouteImport } from './routes/_authenticated/workers/index'
+import { Route as AuthenticatedWorkersIdRouteImport } from './routes/_authenticated/workers/$id'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AuthenticatedRouteRoute = AuthenticatedRouteRouteImport.update({
+  id: '/_authenticated',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AuthRoute = AuthRouteImport.update({
+  id: '/auth',
+  path: '/auth',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AuthenticatedAttendanceRoute = AuthenticatedAttendanceRouteImport.update({
+  id: '/attendance',
+  path: '/attendance',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedHomeRoute = AuthenticatedHomeRouteImport.update({
+  id: '/home',
+  path: '/home',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedMoreRoute = AuthenticatedMoreRouteImport.update({
+  id: '/more',
+  path: '/more',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedPaymentsRoute = AuthenticatedPaymentsRouteImport.update({
+  id: '/payments',
+  path: '/payments',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedWorkersIndexRoute =
+  AuthenticatedWorkersIndexRouteImport.update({
+    id: '/workers/',
+    path: '/workers/',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
+const AuthenticatedWorkersIdRoute = AuthenticatedWorkersIdRouteImport.update({
+  id: '/workers/$id',
+  path: '/workers/$id',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/auth': typeof AuthRoute
+  '/attendance': typeof AuthenticatedAttendanceRoute
+  '/home': typeof AuthenticatedHomeRoute
+  '/more': typeof AuthenticatedMoreRoute
+  '/payments': typeof AuthenticatedPaymentsRoute
+  '/workers/$id': typeof AuthenticatedWorkersIdRoute
+  '/workers/': typeof AuthenticatedWorkersIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/auth': typeof AuthRoute
+  '/attendance': typeof AuthenticatedAttendanceRoute
+  '/home': typeof AuthenticatedHomeRoute
+  '/more': typeof AuthenticatedMoreRoute
+  '/payments': typeof AuthenticatedPaymentsRoute
+  '/workers/$id': typeof AuthenticatedWorkersIdRoute
+  '/workers': typeof AuthenticatedWorkersIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/_authenticated': typeof AuthenticatedRouteRouteWithChildren
+  '/auth': typeof AuthRoute
+  '/_authenticated/attendance': typeof AuthenticatedAttendanceRoute
+  '/_authenticated/home': typeof AuthenticatedHomeRoute
+  '/_authenticated/more': typeof AuthenticatedMoreRoute
+  '/_authenticated/payments': typeof AuthenticatedPaymentsRoute
+  '/_authenticated/workers/$id': typeof AuthenticatedWorkersIdRoute
+  '/_authenticated/workers/': typeof AuthenticatedWorkersIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/auth'
+    | '/attendance'
+    | '/home'
+    | '/more'
+    | '/payments'
+    | '/workers/$id'
+    | '/workers/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/auth'
+    | '/attendance'
+    | '/home'
+    | '/more'
+    | '/payments'
+    | '/workers/$id'
+    | '/workers'
+  id:
+    | '__root__'
+    | '/'
+    | '/_authenticated'
+    | '/auth'
+    | '/_authenticated/attendance'
+    | '/_authenticated/home'
+    | '/_authenticated/more'
+    | '/_authenticated/payments'
+    | '/_authenticated/workers/$id'
+    | '/_authenticated/workers/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AuthenticatedRouteRoute: typeof AuthenticatedRouteRouteWithChildren
+  AuthRoute: typeof AuthRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -48,22 +146,91 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/_authenticated': {
+      id: '/_authenticated'
+      path: ''
+      fullPath: '/'
+      preLoaderRoute: typeof AuthenticatedRouteRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/auth': {
+      id: '/auth'
+      path: '/auth'
+      fullPath: '/auth'
+      preLoaderRoute: typeof AuthRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/_authenticated/attendance': {
+      id: '/_authenticated/attendance'
+      path: '/attendance'
+      fullPath: '/attendance'
+      preLoaderRoute: typeof AuthenticatedAttendanceRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/home': {
+      id: '/_authenticated/home'
+      path: '/home'
+      fullPath: '/home'
+      preLoaderRoute: typeof AuthenticatedHomeRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/more': {
+      id: '/_authenticated/more'
+      path: '/more'
+      fullPath: '/more'
+      preLoaderRoute: typeof AuthenticatedMoreRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/payments': {
+      id: '/_authenticated/payments'
+      path: '/payments'
+      fullPath: '/payments'
+      preLoaderRoute: typeof AuthenticatedPaymentsRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/workers/': {
+      id: '/_authenticated/workers/'
+      path: '/workers'
+      fullPath: '/workers/'
+      preLoaderRoute: typeof AuthenticatedWorkersIndexRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/workers/$id': {
+      id: '/_authenticated/workers/$id'
+      path: '/workers/$id'
+      fullPath: '/workers/$id'
+      preLoaderRoute: typeof AuthenticatedWorkersIdRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
   }
 }
 
+interface AuthenticatedRouteRouteChildren {
+  AuthenticatedAttendanceRoute: typeof AuthenticatedAttendanceRoute
+  AuthenticatedHomeRoute: typeof AuthenticatedHomeRoute
+  AuthenticatedMoreRoute: typeof AuthenticatedMoreRoute
+  AuthenticatedPaymentsRoute: typeof AuthenticatedPaymentsRoute
+  AuthenticatedWorkersIdRoute: typeof AuthenticatedWorkersIdRoute
+  AuthenticatedWorkersIndexRoute: typeof AuthenticatedWorkersIndexRoute
+}
+
+const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
+  AuthenticatedAttendanceRoute: AuthenticatedAttendanceRoute,
+  AuthenticatedHomeRoute: AuthenticatedHomeRoute,
+  AuthenticatedMoreRoute: AuthenticatedMoreRoute,
+  AuthenticatedPaymentsRoute: AuthenticatedPaymentsRoute,
+  AuthenticatedWorkersIdRoute: AuthenticatedWorkersIdRoute,
+  AuthenticatedWorkersIndexRoute: AuthenticatedWorkersIndexRoute,
+}
+
+const AuthenticatedRouteRouteWithChildren =
+  AuthenticatedRouteRoute._addFileChildren(AuthenticatedRouteRouteChildren)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AuthenticatedRouteRoute: AuthenticatedRouteRouteWithChildren,
+  AuthRoute: AuthRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { startInstance } from './start.ts'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-    config: Awaited<ReturnType<typeof startInstance.getOptions>>
-  }
-}
