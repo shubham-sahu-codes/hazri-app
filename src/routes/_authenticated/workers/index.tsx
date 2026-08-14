@@ -14,12 +14,12 @@ import { Onboarding } from "@/components/Onboarding";
 export const Route = createFileRoute("/_authenticated/workers/")({
   head: () => ({
     meta: [
-      { title: "Workers — Kaam Saathi" },
+      { title: "Workers — Hazri App" },
       {
         name: "description",
         content: "Your worker list with daily wage, this month's days worked and pending dues.",
       },
-      { property: "og:title", content: "Workers — Kaam Saathi" },
+      { property: "og:title", content: "Workers — Hazri App" },
       { property: "og:description", content: "Manage workers, wages and pending dues." },
     ],
   }),

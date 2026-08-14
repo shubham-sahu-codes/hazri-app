@@ -14,12 +14,12 @@ import type { AttendanceStatus } from "@/lib/types";
 export const Route = createFileRoute("/_authenticated/attendance")({
   head: () => ({
     meta: [
-      { title: "Mark Attendance — Kaam Saathi" },
+      { title: "Mark Attendance — Hazri App" },
       {
         name: "description",
         content: "Mark daily worker attendance with one tap, add overtime hours and save.",
       },
-      { property: "og:title", content: "Mark Attendance — Kaam Saathi" },
+      { property: "og:title", content: "Mark Attendance — Hazri App" },
       { property: "og:description", content: "One-tap daily attendance for your workers." },
     ],
   }),
