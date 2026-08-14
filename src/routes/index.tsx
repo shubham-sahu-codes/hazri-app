@@ -8,13 +8,13 @@ import { useI18n } from "@/lib/i18n";
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Kaam Saathi — Contractor Attendance & Payment Manager" },
+      { title: "Hazri App — Contractor Attendance & Payment Manager" },
       {
         name: "description",
         content:
           "Mark attendance, auto-calculate wages, overtime and advances, and settle worker payments in seconds.",
       },
-      { property: "og:title", content: "Kaam Saathi — Contractor Attendance & Payment Manager" },
+      { property: "og:title", content: "Hazri App — Contractor Attendance & Payment Manager" },
       {
         property: "og:description",
         content: "Worker ki attendance se lekar payment tak — sab automatic.",

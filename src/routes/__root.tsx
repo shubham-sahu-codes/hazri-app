@@ -80,13 +80,13 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Kaam Saathi — Attendance & Worker Payments" },
+      { title: "Hazri App — Attendance & Worker Payments" },
       {
         name: "description",
         content:
           "Mark worker attendance, auto-calculate daily wages and overtime, and record payments and advances in seconds.",
       },
-      { property: "og:title", content: "Kaam Saathi — Attendance & Worker Payments" },
+      { property: "og:title", content: "Hazri App — Attendance & Worker Payments" },
       {
         property: "og:description",
         content: "Worker ki attendance se lekar payment tak — sab automatic.",
