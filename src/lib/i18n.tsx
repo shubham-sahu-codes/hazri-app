@@ -9,7 +9,7 @@ export const LANGUAGES: { code: Lang; label: string }[] = [
 ];
 
 const en = {
-  app_name: "Kaam Saathi",
+  app_name: "Hazri App",
   tagline: "Worker ki attendance se lekar payment tak — sab automatic.",
   subtitle: "Contractor ka Attendance aur Payment Manager",
   get_started: "Get Started",

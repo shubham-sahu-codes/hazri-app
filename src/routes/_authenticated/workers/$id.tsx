@@ -31,12 +31,12 @@ import { attendanceFor, fmt, formatDate, monthRange, paymentsFor, workerTotals }
 export const Route = createFileRoute("/_authenticated/workers/$id")({
   head: () => ({
     meta: [
-      { title: "Worker Details — Kaam Saathi" },
+      { title: "Worker Details — Hazri App" },
       {
         name: "description",
         content: "Worker profile with attendance history, earnings, advances and payment history.",
       },
-      { property: "og:title", content: "Worker Details — Kaam Saathi" },
+      { property: "og:title", content: "Worker Details — Hazri App" },
       { property: "og:description", content: "Attendance, earnings and payments for one worker." },
     ],
   }),

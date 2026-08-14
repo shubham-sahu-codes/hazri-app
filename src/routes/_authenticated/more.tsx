@@ -22,12 +22,12 @@ import { useQueryClient } from "@tanstack/react-query";
 export const Route = createFileRoute("/_authenticated/more")({
   head: () => ({
     meta: [
-      { title: "Settings & Monthly Summary — Kaam Saathi" },
+      { title: "Settings & Monthly Summary — Hazri App" },
       {
         name: "description",
         content: "Business profile, app language, monthly labour summary and data export.",
       },
-      { property: "og:title", content: "Settings & Monthly Summary — Kaam Saathi" },
+      { property: "og:title", content: "Settings & Monthly Summary — Hazri App" },
       { property: "og:description", content: "Business profile, language and monthly summary." },
     ],
   }),

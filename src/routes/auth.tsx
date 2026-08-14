@@ -18,12 +18,12 @@ const schema = z.object({
 export const Route = createFileRoute("/auth")({
   head: () => ({
     meta: [
-      { title: "Sign in — Kaam Saathi" },
+      { title: "Sign in — Hazri App" },
       {
         name: "description",
         content: "Sign in to manage worker attendance, wages and payments.",
       },
-      { property: "og:title", content: "Sign in — Kaam Saathi" },
+      { property: "og:title", content: "Sign in — Hazri App" },
       { property: "og:description", content: "Contractor attendance and payment manager." },
     ],
   }),

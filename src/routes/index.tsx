@@ -4,17 +4,18 @@ import { ClipboardCheck, HardHat, Wallet } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { supabase } from "@/integrations/supabase/client";
 import { useI18n } from "@/lib/i18n";
+import logo from "@/assets/hazri-logo.png";
 
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Kaam Saathi — Contractor Attendance & Payment Manager" },
+      { title: "Hazri App — Contractor Attendance & Payment Manager" },
       {
         name: "description",
         content:
           "Mark attendance, auto-calculate wages, overtime and advances, and settle worker payments in seconds.",
       },
-      { property: "og:title", content: "Kaam Saathi — Contractor Attendance & Payment Manager" },
+      { property: "og:title", content: "Hazri App — Contractor Attendance & Payment Manager" },
       {
         property: "og:description",
         content: "Worker ki attendance se lekar payment tak — sab automatic.",
@@ -39,6 +40,14 @@ function Landing() {
   return (
     <main className="flex min-h-screen flex-col justify-center bg-background px-5 py-12">
       <div className="mx-auto w-full max-w-md">
+        <img
+          src={logo}
+          alt="Hazri App logo"
+          width={80}
+          height={80}
+          className="mb-3"
+          loading="eager"
+        />
         <span className="inline-flex items-center rounded-full bg-success-soft px-3 py-1 text-xs font-semibold text-success">
           {t("subtitle")}
         </span>

@@ -80,13 +80,13 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Kaam Saathi — Attendance & Worker Payments" },
+      { title: "Hazri App — Attendance & Worker Payments" },
       {
         name: "description",
         content:
           "Mark worker attendance, auto-calculate daily wages and overtime, and record payments and advances in seconds.",
       },
-      { property: "og:title", content: "Kaam Saathi — Attendance & Worker Payments" },
+      { property: "og:title", content: "Hazri App — Attendance & Worker Payments" },
       {
         property: "og:description",
         content: "Worker ki attendance se lekar payment tak — sab automatic.",
@@ -106,7 +106,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
         rel: "stylesheet",
         href: "https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap",
       },
-      { rel: "icon", href: "/favicon.ico", type: "image/x-icon" },
+      { rel: "icon", type: "image/png", href: "/favicon.png" },
     ],
   }),
   shellComponent: RootShell,

@@ -21,12 +21,12 @@ import type { Worker } from "@/lib/types";
 export const Route = createFileRoute("/_authenticated/payments")({
   head: () => ({
     meta: [
-      { title: "Payments — Kaam Saathi" },
+      { title: "Payments — Hazri App" },
       {
         name: "description",
         content: "Pending worker dues and full payment history with receipts you can share.",
       },
-      { property: "og:title", content: "Payments — Kaam Saathi" },
+      { property: "og:title", content: "Payments — Hazri App" },
       { property: "og:description", content: "Settle wages, advances and share receipts." },
     ],
   }),

@@ -23,12 +23,12 @@ import { Onboarding } from "@/components/Onboarding";
 export const Route = createFileRoute("/_authenticated/home")({
   head: () => ({
     meta: [
-      { title: "Today's Overview — Kaam Saathi" },
+      { title: "Today's Overview — Hazri App" },
       {
         name: "description",
         content: "Today's attendance, labour cost, payments made and pending worker dues.",
       },
-      { property: "og:title", content: "Today's Overview — Kaam Saathi" },
+      { property: "og:title", content: "Today's Overview — Hazri App" },
       { property: "og:description", content: "Attendance, labour cost and pending payments." },
     ],
   }),
