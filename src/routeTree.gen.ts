@@ -16,6 +16,7 @@ import { Route as AuthenticatedAttendanceRouteImport } from './routes/_authentic
 import { Route as AuthenticatedHomeRouteImport } from './routes/_authenticated/home'
 import { Route as AuthenticatedMoreRouteImport } from './routes/_authenticated/more'
 import { Route as AuthenticatedPaymentsRouteImport } from './routes/_authenticated/payments'
+import { Route as AuthenticatedSubscriptionRouteImport } from './routes/_authenticated/subscription'
 import { Route as AuthenticatedWorkersIndexRouteImport } from './routes/_authenticated/workers/index'
 import { Route as AuthenticatedWorkersIdRouteImport } from './routes/_authenticated/workers/$id'
 
@@ -53,6 +54,12 @@ const AuthenticatedPaymentsRoute = AuthenticatedPaymentsRouteImport.update({
   path: '/payments',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
+const AuthenticatedSubscriptionRoute =
+  AuthenticatedSubscriptionRouteImport.update({
+    id: '/subscription',
+    path: '/subscription',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
 const AuthenticatedWorkersIndexRoute =
   AuthenticatedWorkersIndexRouteImport.update({
     id: '/workers/',
@@ -72,6 +79,7 @@ export interface FileRoutesByFullPath {
   '/home': typeof AuthenticatedHomeRoute
   '/more': typeof AuthenticatedMoreRoute
   '/payments': typeof AuthenticatedPaymentsRoute
+  '/subscription': typeof AuthenticatedSubscriptionRoute
   '/workers/$id': typeof AuthenticatedWorkersIdRoute
   '/workers/': typeof AuthenticatedWorkersIndexRoute
 }
@@ -82,6 +90,7 @@ export interface FileRoutesByTo {
   '/home': typeof AuthenticatedHomeRoute
   '/more': typeof AuthenticatedMoreRoute
   '/payments': typeof AuthenticatedPaymentsRoute
+  '/subscription': typeof AuthenticatedSubscriptionRoute
   '/workers/$id': typeof AuthenticatedWorkersIdRoute
   '/workers': typeof AuthenticatedWorkersIndexRoute
 }
@@ -94,6 +103,7 @@ export interface FileRoutesById {
   '/_authenticated/home': typeof AuthenticatedHomeRoute
   '/_authenticated/more': typeof AuthenticatedMoreRoute
   '/_authenticated/payments': typeof AuthenticatedPaymentsRoute
+  '/_authenticated/subscription': typeof AuthenticatedSubscriptionRoute
   '/_authenticated/workers/$id': typeof AuthenticatedWorkersIdRoute
   '/_authenticated/workers/': typeof AuthenticatedWorkersIndexRoute
 }
@@ -106,6 +116,7 @@ export interface FileRouteTypes {
     | '/home'
     | '/more'
     | '/payments'
+    | '/subscription'
     | '/workers/$id'
     | '/workers/'
   fileRoutesByTo: FileRoutesByTo
@@ -116,6 +127,7 @@ export interface FileRouteTypes {
     | '/home'
     | '/more'
     | '/payments'
+    | '/subscription'
     | '/workers/$id'
     | '/workers'
   id:
@@ -127,6 +139,7 @@ export interface FileRouteTypes {
     | '/_authenticated/home'
     | '/_authenticated/more'
     | '/_authenticated/payments'
+    | '/_authenticated/subscription'
     | '/_authenticated/workers/$id'
     | '/_authenticated/workers/'
   fileRoutesById: FileRoutesById
@@ -188,6 +201,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedPaymentsRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
+    '/_authenticated/subscription': {
+      id: '/_authenticated/subscription'
+      path: '/subscription'
+      fullPath: '/subscription'
+      preLoaderRoute: typeof AuthenticatedSubscriptionRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
     '/_authenticated/workers/': {
       id: '/_authenticated/workers/'
       path: '/workers'
@@ -210,6 +230,7 @@ interface AuthenticatedRouteRouteChildren {
   AuthenticatedHomeRoute: typeof AuthenticatedHomeRoute
   AuthenticatedMoreRoute: typeof AuthenticatedMoreRoute
   AuthenticatedPaymentsRoute: typeof AuthenticatedPaymentsRoute
+  AuthenticatedSubscriptionRoute: typeof AuthenticatedSubscriptionRoute
   AuthenticatedWorkersIdRoute: typeof AuthenticatedWorkersIdRoute
   AuthenticatedWorkersIndexRoute: typeof AuthenticatedWorkersIndexRoute
 }
@@ -219,6 +240,7 @@ const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedHomeRoute: AuthenticatedHomeRoute,
   AuthenticatedMoreRoute: AuthenticatedMoreRoute,
   AuthenticatedPaymentsRoute: AuthenticatedPaymentsRoute,
+  AuthenticatedSubscriptionRoute: AuthenticatedSubscriptionRoute,
   AuthenticatedWorkersIdRoute: AuthenticatedWorkersIdRoute,
   AuthenticatedWorkersIndexRoute: AuthenticatedWorkersIndexRoute,
 }

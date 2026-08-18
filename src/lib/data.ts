@@ -83,6 +83,36 @@ export function useRefreshAll() {
   };
 }
 
+export interface Subscription {
+  id: string;
+  plan: "base" | "median";
+  started_at: string;
+  expires_at: string;
+}
+
+export function useSubscription() {
+  return useQuery({
+    queryKey: ["subscription"],
+    queryFn: async (): Promise<Subscription | null> => {
+      const { data, error } = await supabase
+        .from("subscriptions")
+        .select("id,plan,started_at,expires_at")
+        .limit(1)
+        .maybeSingle();
+      if (error) throw error;
+      return (data ?? null) as Subscription | null;
+    },
+  });
+}
+
+export async function redeemPlanCode(code: string): Promise<{ plan: "base" | "median" }> {
+  const { data, error } = await supabase.rpc("redeem_plan_code", { _code: code });
+  if (error) throw new Error(error.message);
+  const res = data as { ok: boolean; error?: string; plan?: "base" | "median" };
+  if (!res?.ok) throw new Error(res?.error ?? "invalid_code");
+  return { plan: res.plan ?? "base" };
+}
+
 export async function saveWorker(input: {
   id?: string;
   name: string;

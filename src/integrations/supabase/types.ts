@@ -132,6 +132,33 @@ export type Database = {
           },
         ]
       }
+      plan_codes: {
+        Row: {
+          code: string
+          created_at: string
+          is_used: boolean
+          plan: string
+          used_at: string | null
+          used_by: string | null
+        }
+        Insert: {
+          code: string
+          created_at?: string
+          is_used?: boolean
+          plan: string
+          used_at?: string | null
+          used_by?: string | null
+        }
+        Update: {
+          code?: string
+          created_at?: string
+          is_used?: boolean
+          plan?: string
+          used_at?: string | null
+          used_by?: string | null
+        }
+        Relationships: []
+      }
       profiles: {
         Row: {
           created_at: string
@@ -153,6 +180,36 @@ export type Database = {
           id?: string
           name?: string | null
           phone?: string | null
+        }
+        Relationships: []
+      }
+      subscriptions: {
+        Row: {
+          code: string | null
+          created_at: string
+          expires_at: string
+          id: string
+          plan: string
+          started_at: string
+          user_id: string
+        }
+        Insert: {
+          code?: string | null
+          created_at?: string
+          expires_at: string
+          id?: string
+          plan: string
+          started_at?: string
+          user_id: string
+        }
+        Update: {
+          code?: string | null
+          created_at?: string
+          expires_at?: string
+          id?: string
+          plan?: string
+          started_at?: string
+          user_id?: string
         }
         Relationships: []
       }
@@ -200,7 +257,7 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      redeem_plan_code: { Args: { _code: string }; Returns: Json }
     }
     Enums: {
       [_ in never]: never
