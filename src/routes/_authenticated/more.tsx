@@ -1,7 +1,7 @@
-import { createFileRoute, useNavigate } from "@tanstack/react-router";
+import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { useEffect, useMemo, useState } from "react";
 import { toast } from "sonner";
-import { Download, LogOut } from "lucide-react";
+import { Download, LogOut, Sparkles } from "lucide-react";
 import { AppShell } from "@/components/AppShell";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -13,6 +13,7 @@ import {
   useBusiness,
   usePayments,
   useRefreshAll,
+  useSubscription,
   useWorkers,
 } from "@/lib/data";
 import { attendanceFor, fmt, monthRange, paymentsFor, workerTotals } from "@/lib/calc";
@@ -42,6 +43,7 @@ function MorePage() {
   const workers = useWorkers();
   const attendance = useAttendance();
   const payments = usePayments();
+  const subscription = useSubscription();
   const refresh = useRefreshAll();
   const [bizName, setBizName] = useState("");
   const [contractor, setContractor] = useState("");
@@ -133,6 +135,22 @@ function MorePage() {
 
   return (
     <AppShell title={t("settings")}>
+      <Link
+        to="/subscription"
+        className="mb-4 flex items-center justify-between gap-3 rounded-2xl border border-border bg-card p-5 shadow-card"
+      >
+        <span className="flex items-center gap-2 font-display font-semibold">
+          <Sparkles className="size-4 text-primary" /> Subscription
+        </span>
+        <span className="text-sm text-muted-foreground">
+          {subscription.data && new Date(subscription.data.expires_at).getTime() > Date.now()
+            ? `${subscription.data.plan === "median" ? "Median" : "Base"} · till ${new Date(
+                subscription.data.expires_at,
+              ).toLocaleDateString("en-IN")}`
+            : "Not active"}
+        </span>
+      </Link>
+
       <section className="rounded-2xl border border-border bg-card p-5 shadow-card">
         <h2 className="font-display font-semibold">{t("monthly_summary")}</h2>
         <div className="mt-3 space-y-2 text-sm">
