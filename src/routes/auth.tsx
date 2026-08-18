@@ -39,6 +39,7 @@ function AuthPage() {
   const [password, setPassword] = useState("");
   const [busy, setBusy] = useState(false);
   const [sent, setSent] = useState(false);
+  const [resetSent, setResetSent] = useState(false);
 
   useEffect(() => {
     void supabase.auth.getSession().then(({ data }) => {
@@ -100,6 +101,27 @@ function AuthPage() {
     }
     if (result.redirected) return;
     void navigate({ to: "/home", replace: true });
+  }
+
+  async function forgotPassword() {
+    const parsedEmail = z.string().trim().email().safeParse(email);
+    if (!parsedEmail.success) {
+      toast.error("Please enter your email first.");
+      return;
+    }
+    setBusy(true);
+    try {
+      const { error } = await supabase.auth.resetPasswordForEmail(parsedEmail.data, {
+        redirectTo: `${window.location.origin}/reset-password`,
+      });
+      if (error) throw error;
+      setResetSent(true);
+      toast.success("Password reset link sent to your email.");
+    } catch (e) {
+      toast.error(e instanceof Error ? e.message : t("err_generic"));
+    } finally {
+      setBusy(false);
+    }
   }
 
   return (
@@ -169,6 +191,16 @@ function AuthPage() {
             >
               {t("continue_google")}
             </Button>
+            {mode === "signin" && (
+              <button
+                type="button"
+                className="w-full py-1 text-sm text-muted-foreground underline-offset-4 hover:underline"
+                disabled={busy}
+                onClick={() => void forgotPassword()}
+              >
+                {resetSent ? "Reset link sent — check your email" : "Forgot password?"}
+              </button>
+            )}
             <button
               type="button"
               className="w-full py-2 text-sm text-muted-foreground underline-offset-4 hover:underline"
